@@ -16,6 +16,7 @@
         </asp:DropDownList>
     </p>
     <p>
+        <asp:Button ID="Button1" runat="server" Text="Book" onclick="Button1_Click" />
     </p>
     <p>
     </p>
