@@ -8,13 +8,13 @@
     </script>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <form id="form1" runat="server" style="height: 318px">
-    <asp:Label ID="Label1" runat="server" ForeColor="White" Text="Book An Advisor"></asp:Label>
+    <asp:Label ID="Label1" runat="server" ForeColor="#CCCCCC" 
+        Text="Book An Advisor"></asp:Label>
     <br /><br /><br />
-    <asp:GridView ID="GridView1" runat="server" BackColor="White" 
-        BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
-        ForeColor="Black" GridLines="Vertical" Height="104px" Width="594px" 
+    <asp:GridView ID="GridView1" runat="server" CellPadding="4" 
+        ForeColor="#333333" GridLines="None" Height="104px" Width="594px" 
         onrowcreated="erow_c" Font-Size="Small">
-        <AlternatingRowStyle BackColor="#FFFFFF" />
+        <AlternatingRowStyle BackColor="White" ForeColor="#333333" />
         <Columns>
             <asp:TemplateField ShowHeader="False">
                 <ItemTemplate>
@@ -24,14 +24,16 @@
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
-        <FooterStyle BackColor="#CCCCCC" />
-        <HeaderStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#003366" />
-        <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Center" />
-        <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-        <SortedAscendingCellStyle BackColor="#F1F1F1" />
-        <SortedAscendingHeaderStyle BackColor="White" />
-        <SortedDescendingCellStyle BackColor="#FFCCCC" />
-        <SortedDescendingHeaderStyle BackColor="#383838" />
+        <EditRowStyle BackColor="#999999" />
+        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
     <br />
     </form>

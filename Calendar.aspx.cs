@@ -75,7 +75,7 @@ public partial class Default3 : System.Web.UI.Page
 
 
 
-
+            
                e.Cell.Font.Strikeout = false;
                e.Cell.ForeColor = System.Drawing.Color.Red;
                e.Cell.Font.Size=12;

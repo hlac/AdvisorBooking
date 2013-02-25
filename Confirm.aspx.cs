@@ -13,8 +13,12 @@ public partial class Default2 : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        try { if (Session["date"].ToString() == null);if (Session["ID"].ToString() == null);}
-        catch{ Server.Transfer("Advisor.aspx"); }
+
+            if (Session["date"] == null || Session["ID"] == null)
+            {
+                Server.Transfer("Advisor.aspx");
+            }
+
         
         int advisorId = Convert.ToInt16(Session["ID"].ToString());
         string date = Session["date"].ToString();
@@ -34,9 +38,7 @@ public partial class Default2 : System.Web.UI.Page
         DropDownList1.DataSource = shorttime;
         if(!IsPostBack)
           {DropDownList1.DataBind();}
-        
 
-        
     }
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -44,45 +46,73 @@ public partial class Default2 : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        int advisorId = Convert.ToInt16(Session["ID"].ToString());
-        string date = Session["date"].ToString();
-        
-        DateTime datev2 = DateTime.ParseExact(Session["date"].ToString(), "MM/dd/yyyy", null);
-
-        
-
-        DateTime picked = new DateTime();
-        picked = DateTime.ParseExact(DropDownList1.SelectedValue.ToString(), "h:mm tt", CultureInfo.InvariantCulture);
-
-        int Student_Id = 822459073;
-        int Advisor_Id = Convert.ToInt16(Session["ID"].ToString());
-        string Time = picked.ToString("HH:mm:ss");
-        string Date = datev2.ToString("yyyy-MM-dd");
-        Label1.Text = Time;
-        int Completed = 0;
-        string sqlQuery = "INSERT INTO Scheduling (Student_Id,Advisor_Id,Time,Date,Completed)";
-        sqlQuery += " VALUES (@Student_Id,@Advisor_Id,@Time,@Date,@Completed)";
-        string connectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ToString();
-        using (SqlConnection dataConnection = new SqlConnection(connectionString))
+        //Prevent corruption
+        if (Session["date"] != null && Session["ID"] != null)
         {
-            using (SqlCommand dataCommand = new SqlCommand(sqlQuery, dataConnection))
+            int advisorId = Convert.ToInt16(Session["ID"].ToString());
+            string date = Session["date"].ToString();
+            Session["date"] = null;
+            Session["ID"] = null;
+            ronUtil get = new ronUtil(advisorId);
+            DateTime datev2 = DateTime.ParseExact(date, "MM/dd/yyyy", null);
+            DateTime[] advisorAllSlots = get.getSlots(advisorId);
+            DateTime[] taken = get.getTaken(advisorId, datev2.ToString("yyyy-MM-dd"));
+            DateTime[] availibility = get.getAvailability(advisorAllSlots, taken);
+
+            Session["date"] = null;
+            
+
+            bool proceed = false;
+            for (int i = 0; i < availibility.Length; i++)
             {
-
-                dataCommand.Parameters.AddWithValue("Student_Id", Student_Id);
-                dataCommand.Parameters.AddWithValue("Advisor_Id", Advisor_Id);
-                dataCommand.Parameters.AddWithValue("Time", Time);
-                dataCommand.Parameters.AddWithValue("Date", Date);
-                dataCommand.Parameters.AddWithValue("Completed", Completed);
-
-
-                dataConnection.Open();
-                dataCommand.ExecuteNonQuery();
-                dataConnection.Close();
+                if (DropDownList1.SelectedValue.ToString() == availibility[i].ToShortTimeString())
+                {
+                    proceed = true;
+                }
             }
+
+            if (proceed == true)
+            {
+                DateTime picked = new DateTime();
+                picked = DateTime.ParseExact(DropDownList1.SelectedValue.ToString(), "h:mm tt", CultureInfo.InvariantCulture);
+
+                int Student_Id = 822459073;
+                int Advisor_Id = advisorId;
+                string Time = picked.ToString("HH:mm:ss");
+                string Date = datev2.ToString("yyyy-MM-dd");
+                Label1.Text = Time;
+                int Completed = 0;
+                string sqlQuery = "INSERT INTO Scheduling (Student_Id,Advisor_Id,Time,Date,Completed)";
+                sqlQuery += " VALUES (@Student_Id,@Advisor_Id,@Time,@Date,@Completed)";
+                string connectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ToString();
+                using (SqlConnection dataConnection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand dataCommand = new SqlCommand(sqlQuery, dataConnection))
+                    {
+
+                        dataCommand.Parameters.AddWithValue("Student_Id", Student_Id);
+                        dataCommand.Parameters.AddWithValue("Advisor_Id", Advisor_Id);
+                        dataCommand.Parameters.AddWithValue("Time", Time);
+                        dataCommand.Parameters.AddWithValue("Date", Date);
+                        dataCommand.Parameters.AddWithValue("Completed", Completed);
+
+
+                        dataConnection.Open();
+                        dataCommand.ExecuteNonQuery();
+                        dataConnection.Close();
+                    }
+                }
+
+                Response.Write("<script type='text/javascript'>alert('You are booked');</script>");
+                Server.Transfer("Advisor.aspx");
+            }
+            else
+            {
+                Response.Write("<script type='text/javascript'>alert('Something went wrong. Try again later');</script>");
+                Server.Transfer("Advisor.aspx");
+            }
+
+
         }
-
-        Response.Write("<script type='text/javascript'>alert('You are booked');</script>");
-        Server.Transfer("Advisor.aspx");
-
     }
 }
