@@ -57,31 +57,50 @@ public class ronUtil
     }
     public DateTime[] getAvailability(DateTime[] advisorAllSlots, DateTime[] taken)
     {
-        
+
+
         int length = advisorAllSlots.Length - taken.Length;
+        DateTime[] slots = advisorAllSlots; 
         DateTime[] available = new DateTime[length];
-        int i = 0, ii = 0;
-        int counter = 0;
+        
+        int counter = 0; int counter1 = 0;
         if (taken.Length == 0)
         { available = advisorAllSlots; }
         else
         {
-            for (i = 0; i < advisorAllSlots.Length; i++)
+            for (int i = 0; i < advisorAllSlots.Length; i++)
             {
 
-                for (ii = 0; ii < taken.Length; ii++)
+                for (int ii = 0; ii < taken.Length; ii++)
                 {
-                    if (advisorAllSlots[i] != taken[ii])
-                    { available[counter] = advisorAllSlots[i]; counter++; }
+                    if (advisorAllSlots[i].ToShortTimeString() == taken[ii].ToShortTimeString() )
+                    {
+                        slots[i] = DateTime.Now; 
+                        
+                    }
 
                 }
             }
+
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i] != DateTime.Now)
+                { available[counter1] = slots[i]; counter1++; }
+            }
+
+
         }
         return available;
+
+
+                    
+        
     }
 
 
-    public DateTime[] getSlots(int advisor_Id)
+
+
+    public DateTime[] getSlots(int advisor_Id, string date)
     { //inttime = total available time slots as int
         //doubletime = total available time slots as double
         SqlDataSource SqlDataSource = new SqlDataSource();
@@ -95,12 +114,14 @@ public class ronUtil
         DateTime start = DateTime.Parse(table.Rows[0][0].ToString());
         DateTime end = DateTime.Parse(table.Rows[0][1].ToString());
         double dbltime = ((end - start).TotalHours) * 2;
+        
         int inttime = Convert.ToInt32(dbltime);
 
         DateTime[] advisorSlots = new DateTime[inttime];
 
         for (int i = 0; i < inttime; i++)
         {
+              
             advisorSlots[i] = start;
             start = start.AddMinutes(30);
         }
@@ -117,14 +138,15 @@ public class ronUtil
 
         DataView view = (DataView)SqlDataSource3.Select(DataSourceSelectArguments.Empty);
         DataTable table = view.ToTable();
-
+        
         //   string[] slotsTaken = new string[table.Rows.Count];
 
         DateTime[] slotsTaken = new DateTime[table.Rows.Count];
-        for (int i = 0; i < table.Rows.Count; i++)
-        {
-            slotsTaken[i] = DateTime.Parse(table.Rows[0][0].ToString());
-        }
+
+            for (int ii = 0; ii < table.Rows.Count; ii++)
+            { slotsTaken[ii] = DateTime.Parse(table.Rows[ii][0].ToString()); }
+
+        
 
         //  Label1.Text = slotsTaken[0].ToShortTimeString();
         return slotsTaken;
@@ -240,6 +262,24 @@ public class ronUtil
 
 
 
+    public bool getCheck(string stID)
+    {
+        int Student_Id = Convert.ToInt32(stID);
+        DateTime date = DateTime.Now;
+        SqlDataSource SqlDataSource3 = new SqlDataSource();
+        SqlDataSource3.ConnectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ToString();
+        SqlDataSource3.SelectCommand = "Select Time From Scheduling  Where Student_Id='" + Student_Id + "' AND Date>'" + date + "'";
+
+        DataView view = (DataView)SqlDataSource3.Select(DataSourceSelectArguments.Empty);
+        DataTable table = view.ToTable();
+
+        //   string[] slotsTaken = new string[table.Rows.Count];
+        bool check=false;
+        if (table.Rows.Count==0)
+        {check=true;}
+        
+        return check;
+    }
 
 
 

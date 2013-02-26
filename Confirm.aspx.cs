@@ -12,7 +12,7 @@ public partial class Default2 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //Prwvent excepts,corruptions.
 
             if (Session["date"] == null || Session["ID"] == null)
             {
@@ -23,21 +23,27 @@ public partial class Default2 : System.Web.UI.Page
         int advisorId = Convert.ToInt16(Session["ID"].ToString());
         string date = Session["date"].ToString();
         ronUtil get = new ronUtil(advisorId);
-        DateTime datev2 = DateTime.ParseExact(Session["date"].ToString(), "MM/dd/yyyy", null);             
-        DateTime[] advisorAllSlots = get.getSlots(advisorId);
+        DateTime datev2 = DateTime.ParseExact(Session["date"].ToString(), "MM/dd/yyyy", null);
+        DateTime[] advisorAllSlots = get.getSlots(advisorId, datev2.ToString("yyyyMMdd"));
         DateTime[] taken = get.getTaken(advisorId, datev2.ToString("yyyy-MM-dd"));
         DateTime[] availibility = get.getAvailability(advisorAllSlots, taken);
         string[] shorttime = new string[availibility.Length];
         for (int i = 0; i < availibility.Length; i++)
         { shorttime[i] = availibility[i].ToShortTimeString(); }
-        Label2.Text = get.FullName;
-        Label3.Text = "AdvisorID:" + Session["ID"].ToString(); 
+        Label3.Text = "For Advisor: " + get.FullName;
+        Label2.Text = "Your StudentID: " + Session["Student"].ToString(); ; 
         Label1.Text = "Date:" + Session["date"].ToString();
-        
+      
 
-        DropDownList1.DataSource = shorttime;
-        if(!IsPostBack)
-          {DropDownList1.DataBind();}
+            DropDownList1.DataSource = shorttime;
+            if (!IsPostBack)
+            { DropDownList1.DataBind(); }
+
+            
+            if (availibility.Length==0)
+            {Response.Write("<script type='text/javascript'>alert('It is fully booked.');</script>");
+                Server.Transfer("Calendar.aspx");}
+            
 
     }
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,7 +52,7 @@ public partial class Default2 : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        //Prevent corruption
+        //Prevent corruption. Double check availability. Delete cookies
         if (Session["date"] != null && Session["ID"] != null)
         {
             int advisorId = Convert.ToInt16(Session["ID"].ToString());
@@ -55,7 +61,7 @@ public partial class Default2 : System.Web.UI.Page
             Session["ID"] = null;
             ronUtil get = new ronUtil(advisorId);
             DateTime datev2 = DateTime.ParseExact(date, "MM/dd/yyyy", null);
-            DateTime[] advisorAllSlots = get.getSlots(advisorId);
+            DateTime[] advisorAllSlots = get.getSlots(advisorId, datev2.ToString("yyyyMMdd"));
             DateTime[] taken = get.getTaken(advisorId, datev2.ToString("yyyy-MM-dd"));
             DateTime[] availibility = get.getAvailability(advisorAllSlots, taken);
 
@@ -81,9 +87,12 @@ public partial class Default2 : System.Web.UI.Page
                 string Time = picked.ToString("HH:mm:ss");
                 string Date = datev2.ToString("yyyy-MM-dd");
                 Label1.Text = Time;
+                string Comments = TextArea1.Value.ToString();
                 int Completed = 0;
-                string sqlQuery = "INSERT INTO Scheduling (Student_Id,Advisor_Id,Time,Date,Completed)";
-                sqlQuery += " VALUES (@Student_Id,@Advisor_Id,@Time,@Date,@Completed)";
+
+
+                string sqlQuery = "INSERT INTO Scheduling (Student_Id,Advisor_Id,Time,Date,Comments,Completed)";
+                sqlQuery += " VALUES (@Student_Id,@Advisor_Id,@Time,@Date,@Comments,@Completed)";
                 string connectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ToString();
                 using (SqlConnection dataConnection = new SqlConnection(connectionString))
                 {
@@ -94,8 +103,8 @@ public partial class Default2 : System.Web.UI.Page
                         dataCommand.Parameters.AddWithValue("Advisor_Id", Advisor_Id);
                         dataCommand.Parameters.AddWithValue("Time", Time);
                         dataCommand.Parameters.AddWithValue("Date", Date);
+                        dataCommand.Parameters.AddWithValue("Comments", Comments);
                         dataCommand.Parameters.AddWithValue("Completed", Completed);
-
 
                         dataConnection.Open();
                         dataCommand.ExecuteNonQuery();
@@ -114,5 +123,9 @@ public partial class Default2 : System.Web.UI.Page
 
 
         }
+    }
+    protected void TextBox1_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }
