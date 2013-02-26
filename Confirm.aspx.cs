@@ -14,6 +14,7 @@ public partial class Default2 : System.Web.UI.Page
     {
         //Prwvent excepts,corruptions.
 
+        Session["Student"]=822459053;
             if (Session["date"] == null || Session["ID"] == null)
             {
                 Server.Transfer("Advisor.aspx");

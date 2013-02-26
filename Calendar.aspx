@@ -10,8 +10,8 @@
         ronUtil get = new ronUtil(Convert.ToInt16(Request.QueryString["ID"]));
 
         Label1.Text = "Advisor:" + get.FullName ;
-        
 
+        Session["Student"] = 822459053;
 
         
 
