@@ -16,8 +16,8 @@ public partial class Default2 : System.Web.UI.Page
         GridView1.DataBind();
 
 
-        if (Session["Student"] == null)
-        { Server.Transfer("TestLogin.aspx"); }
+        //if (Session["Student"] == null)
+        //{ Server.Transfer("Advisor.aspx"); }
     }
 
 
