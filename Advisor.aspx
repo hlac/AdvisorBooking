@@ -2,8 +2,7 @@
 <script language="C#" runat="server">
     void cmd(Object sender, EventArgs e) 
     {
-
-        //
+        Session["Student"] = 822459053;
     }
     </script>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">

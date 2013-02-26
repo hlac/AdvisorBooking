@@ -2,9 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <form id="form1" runat="server">
-    <asp:Label ID="Label1" runat="server" Text="Enter your student number" 
-        ForeColor="#F7F7F7"></asp:Label>
-    <asp:TextBox ID="txtStudentID" runat="server" Text="312345678"></asp:TextBox>
     <asp:Button ID="Button1" runat="server" OnClick="Button1_Click"  Text="Login" />
 
            <asp:RequiredFieldValidator ID="rfvStudentID" runat="server" 
