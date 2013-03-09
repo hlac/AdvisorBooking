@@ -35,7 +35,7 @@ img {
 #page {
 	margin: 0 auto;
 	width: 1004px;
-	background: url("images/page.gif") repeat-y;
+	background: url("images/page.jpg") repeat-y;
 }
 
 #page-top {
@@ -182,7 +182,7 @@ img {
 	
 	#sidebar {
 		float: left;
-		width: 341px;
+		width: 190px;
 		font: normal 12px/18px Verdana;
 		color: #8b919b;
 		margin-top: 68px;
@@ -309,22 +309,24 @@ img {
 	
 	#content {
 		float: left;
-		width: 599px;
-	}
+		width: 759px;
+    height: 29px;
+}
 	
 	/* Main - Content - Post */
 	
 	#content .post {
 		float: left;
-		margin-bottom: 20px;
-		width: 599px;
-	}
+		margin-bottom: 0px;
+		width: 709px;
+    height: 29px;
+}
 	
 		/* Post - Title */
 		
 		#content .post .post-title {
-			width: 599px;
-			height: 59px;
+			width: 750px;
+			height: 32px;
 			color: #8da3a8;
 			font: normal 12px Verdana;
 			margin-bottom: 8px;
@@ -402,7 +404,7 @@ img {
 			
 			#content .post .post-title .post-title-info .post-title-comments {
 				float: left;
-				background: url("images/icon_comments.gif") no-repeat left center;
+				/*background: url("images/icon_comments.gif") no-repeat left center;*/
 				padding: 0 0 0 20px;
 				height: 20px;
 				line-height: 20px;
@@ -410,22 +412,24 @@ img {
 		
 		/* Post - Entry */
 		
+			#content .post .post-entry-top {
+				background: url("images/post_entry_top.jpg") no-repeat;
+				width: 759px;
+			}
+			
 		#content .post .post-entry {
 			font: normal 12px/20px Arial, Verdana;
 			color: #797f88;
-			width: 599px;
-			background: url("images/post_entry.gif") repeat-y;
+			width: 759px;
+			background: url("images/post_entry.jpg") repeat-y;
 		}
 		
-			#content .post .post-entry-top {
-				background: url("images/post_entry_top.gif") no-repeat;
-				width: 599px;
-			}
+		
 			
 			#content .post .post-entry-bottom {
-				background: url("images/post_entry_bottom.gif") no-repeat left bottom;
-				padding: 1px 9px 1px 6px;
-				width: 584px;
+				background: url("images/post_entry_bottom.jpg") no-repeat left bottom;
+				padding:  0px  0px 9px 6px;
+				width: 759px;
 			}
 		
 		#content .post .post-entry a {
@@ -514,7 +518,7 @@ img {
 		#content .post #commentform {
 			font: normal 12px/20px Arial, Verdana;
 			color: #797f88;
-			width: 559px;
+			width: 759px;
 			padding-left: 25px;
 			margin: 0;
 		}
@@ -533,7 +537,7 @@ img {
 	#content .navigation {
 		color: #9cb72f;
 		float: left;
-		width: 599px;
+		width: 799px;
 	}
 	
 	#content .navigation a {
@@ -560,10 +564,13 @@ img {
 
 #footer {
 	width: 590px;
-	height: 36px;
+	height: 0px;
 	padding: 5px 17px 37px 397px;
 	color: #4c576a;
 	font: normal 12px/36px Arial, Verdana;
+	position:relative;
+    top: 36px;
+    left: 0px;
 }
 
 #footer a {
@@ -578,4 +585,16 @@ img {
 .wt {
 	color: #4c576a;
 text-decoration: none;
+}
+
+.calendar
+{
+
+	width:500px;
+	margin:0px auto;
+	text-align:center;
+	padding:15px;
+	border:1px dashed #333;
+	background-color:#eee;
+  position :relative;
 }

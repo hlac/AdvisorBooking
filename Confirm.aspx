@@ -24,7 +24,9 @@
         <br />
         <textarea id="TextArea1" name="S1" style="height: 63px; width: 176px" runat="server"></textarea><br />
   
-      <br />  <asp:Button ID="Button1" runat="server" Text="Book" onclick="Button1_Click" />
+      <br />  <asp:Button ID="Button1" runat="server" Text="Book" 
+            onclick="Button1_Click" Visible="False" />
+        <asp:Button ID="Button2" runat="server" Text="Cancel" Visible="False" />
     </p>
     <p>
     </p>

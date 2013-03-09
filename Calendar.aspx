@@ -2,14 +2,14 @@
 <script runat=server>
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.QueryString["ID"] == null)
-        {
-            Server.Transfer("Advisor.aspx");
-        }
+        //if (Request.QueryString["ID"] == null)
+        //{
+        //    Server.Transfer("Advisor.aspx");
+        //}
         
-        ronUtil get = new ronUtil(Convert.ToInt16(Request.QueryString["ID"]));
+        ronUtil2 get = new ronUtil2(Convert.ToInt16(Request.QueryString["ID"]));
 
-        Label1.Text = "Advisor:" + get.FullName ;
+        //Label1.Text = "Advisor:" + get.FullName ;
 
         Session["Student"] = 822459053;
 
@@ -29,19 +29,25 @@
     <% Session["date"] = Calendar1.SelectedDate.ToString("MM/dd/yyyy"); %>
     <% Session["ID"] = Request.QueryString["ID"]; %>
     
-    
-      
-        <asp:Label ID="Label1" runat="server" Text="Label" ForeColor="#CCCCCC" 
-          Font-Size="Medium"></asp:Label>
-        
-      <br />
-      <br />
+        <div class="post" id="post-5">
+    <div class="post-title">
+            <center>
+                <h2>
+                    <a href="#">Book An Advisor</a></h2>
+            </center>
+        </div>
+        <div class="post-entry">
+            <div class="post-entry-top">
+                <div class="post-entry-bottom">
+                <br />
+
+      <div style="margin:0 auto; text-align:center; Width:401px">
     <asp:Calendar ID="Calendar1" runat="server" BackColor="White" 
             BorderColor="Black" Font-Names="Times New Roman" 
-            Font-Size="10pt" ForeColor="Black" Height="263px" NextPrevFormat="FullMonth" 
-            Width="501px" ondayrender="Calendar1_DayRender" onprerender="Calendar1_SelectionChanged" 
+            Font-Size="10pt" ForeColor="Black" Height="23px" NextPrevFormat="FullMonth" 
+            Width="401px" ondayrender="Calendar1_DayRender" onprerender="Calendar1_SelectionChanged" 
             onselectionchanged="Calendar1_SelectionChanged" DayNameFormat="Shortest" 
-            TitleFormat="Month" ShowNextPrevMonth="False">
+            TitleFormat="Month" ShowNextPrevMonth="False" style="margin:0 auto; text-align:center;">
             <DayHeaderStyle Font-Bold="True" Font-Size="7pt" ForeColor="#333333" 
                 Height="10pt" BackColor="#EEEEEE" />
             <DayStyle Width="14%" />
@@ -54,17 +60,19 @@
                 Font-Size="13pt" ForeColor="White" Height="14pt" />
             <TodayDayStyle BackColor="#FFFFCC" />
         </asp:Calendar>
-    <br />
 
+    
 
-
+          <div style="margin:0 auto; text-align:left; Width:401px">
  <asp:Button ID="Button2" runat="server" Text="Continue" 
-        CausesValidation="false" OnClick="cmd" />
+        CausesValidation="false" OnClick="cmd" /></div>
 
+    
+           </div>
+           <br />
 
-
-    <br />
-    <br />
+    </div></div></div></div>
     </form>
+
 </asp:Content>
 

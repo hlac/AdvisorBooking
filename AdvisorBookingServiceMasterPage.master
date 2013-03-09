@@ -54,13 +54,19 @@
                     <div id="content">
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                         </asp:ContentPlaceHolder>
+
                     </div>
                     <div class="clear">
                     </div>
-                </div>
-                <div id="footer">
+
+                    <br /><br />
+                    
+                                        <div id="footer">
                     <a href="#" class="wt">Web Design</a> by Team Six
                 </div>
+
+                </div>
+
             </div>
         </div>
     </div>
