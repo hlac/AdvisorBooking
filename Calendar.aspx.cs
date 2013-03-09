@@ -83,7 +83,7 @@ public partial class Default3 : System.Web.UI.Page
                         e.Day.IsSelectable = false;
                         //e.Cell.Font.Strikeout = true;
                         e.Cell.ForeColor = System.Drawing.Color.Gray;
-                        e.Cell.Font.Size = 10;
+                        e.Cell.Font.Size = 9;
                     }
                 }
 
@@ -96,7 +96,7 @@ public partial class Default3 : System.Web.UI.Page
                         e.Day.IsSelectable = false;
                         //e.Cell.Font.Strikeout = true;
                         e.Cell.ForeColor = System.Drawing.Color.Gray;
-                        e.Cell.Font.Size = 10;
+                        e.Cell.Font.Size = 8;
                     }
                 }
 
@@ -109,7 +109,7 @@ public partial class Default3 : System.Web.UI.Page
                         e.Day.IsSelectable = false;
                         //e.Cell.Font.Strikeout = true;
                         e.Cell.ForeColor = System.Drawing.Color.Gray;
-                        e.Cell.Font.Size = 10;
+                        e.Cell.Font.Size = 8;
                     }
                 }
 
@@ -121,7 +121,7 @@ public partial class Default3 : System.Web.UI.Page
                         e.Day.IsSelectable = false;
                         //e.Cell.Font.Strikeout = true;
                         e.Cell.ForeColor = System.Drawing.Color.Gray;
-                        e.Cell.Font.Size = 10;
+                        e.Cell.Font.Size = 8;
                     }
                 }
 
@@ -133,7 +133,7 @@ public partial class Default3 : System.Web.UI.Page
                         e.Day.IsSelectable = false;
                        //e.Cell.Font.Strikeout = true;
                         e.Cell.ForeColor = System.Drawing.Color.Gray;
-                        e.Cell.Font.Size = 10;
+                        e.Cell.Font.Size = 8;
                     }
                 }
 
