@@ -18,11 +18,7 @@ public partial class Default3 : System.Web.UI.Page
    
  
     protected void Page_Load(object sender, EventArgs e)
-    {
-        
- 
-      
-
+    {            
           
     }
     protected void Calendar1_SelectionChanged(object sender, EventArgs e)
@@ -35,7 +31,7 @@ public partial class Default3 : System.Web.UI.Page
         
 
             int id = Convert.ToInt16(Request.QueryString["ID"]);
-           ronUtil get = new ronUtil(id); 
+           ronUtil2 get = new ronUtil2(id); 
         
         
         int length = get.DaysAvailable.Length;
@@ -87,7 +83,7 @@ public partial class Default3 : System.Web.UI.Page
                         e.Day.IsSelectable = false;
                         //e.Cell.Font.Strikeout = true;
                         e.Cell.ForeColor = System.Drawing.Color.Gray;
-                        e.Cell.Font.Size = 10;
+                        e.Cell.Font.Size = 9;
                     }
                 }
 
@@ -100,7 +96,7 @@ public partial class Default3 : System.Web.UI.Page
                         e.Day.IsSelectable = false;
                         //e.Cell.Font.Strikeout = true;
                         e.Cell.ForeColor = System.Drawing.Color.Gray;
-                        e.Cell.Font.Size = 10;
+                        e.Cell.Font.Size = 8;
                     }
                 }
 
@@ -113,7 +109,7 @@ public partial class Default3 : System.Web.UI.Page
                         e.Day.IsSelectable = false;
                         //e.Cell.Font.Strikeout = true;
                         e.Cell.ForeColor = System.Drawing.Color.Gray;
-                        e.Cell.Font.Size = 10;
+                        e.Cell.Font.Size = 8;
                     }
                 }
 
@@ -125,7 +121,7 @@ public partial class Default3 : System.Web.UI.Page
                         e.Day.IsSelectable = false;
                         //e.Cell.Font.Strikeout = true;
                         e.Cell.ForeColor = System.Drawing.Color.Gray;
-                        e.Cell.Font.Size = 10;
+                        e.Cell.Font.Size = 8;
                     }
                 }
 
@@ -137,7 +133,7 @@ public partial class Default3 : System.Web.UI.Page
                         e.Day.IsSelectable = false;
                        //e.Cell.Font.Strikeout = true;
                         e.Cell.ForeColor = System.Drawing.Color.Gray;
-                        e.Cell.Font.Size = 10;
+                        e.Cell.Font.Size = 8;
                     }
                 }
 

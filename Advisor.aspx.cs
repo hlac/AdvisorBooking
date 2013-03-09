@@ -9,20 +9,36 @@ public partial class Default2 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
 
-        ronUtil get= new ronUtil();
-        GridView1.DataSource = get.loadAdvisorsToGrid();        
-        GridView1.DataBind();
+        ronUtil2 get = new ronUtil2();
+        int[] ID = get.getAdvisorIDs();
 
+        for (int ii = 0; ii < ID.Length; ii++)
+        {
+            TableCell[] td = new TableCell[8];
+            HyperLink link = new HyperLink();
+            link.NavigateUrl = "~/Calendar.aspx?ID=" + ID[ii];
+            for (int i = 0; i < 8; i++) { td[i] = new TableCell(); }
 
-        //if (Session["Student"] == null)
-        //{ Server.Transfer("Advisor.aspx"); }
+            link.Text = get.getName(ID[ii]);
+            td[0].Controls.Add(link);
+            td[1].Text = get.getDepartment(ID[ii]);
+            td[2].Text = get.getMonday(ID[ii]);
+            td[3].Text = get.getTuesday(ID[ii]);
+            td[4].Text = get.getWednesday(ID[ii]);
+            td[5].Text = get.getThursday(ID[ii]);
+            td[6].Text = get.getFriday(ID[ii]);
+
+            TableRow tRow = new TableRow();
+            myTable.Rows.Add(tRow);
+            tRow.Cells.AddRange(td);
+        }
+
     }
 
 
     protected void erow_c(object sender, GridViewRowEventArgs e)
     {
-       e.Row.Cells[5].Visible = false;
+        //e.Row.Cells[5].Visible = false;
     }
 }
