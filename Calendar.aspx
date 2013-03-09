@@ -12,7 +12,7 @@
         //Label1.Text = "Advisor:" + get.FullName ;
 
         Session["Student"] = 822459053;
-
+        Label1.Text = get.FullName;
         
 
     }
@@ -33,7 +33,7 @@
     <div class="post-title">
             <center>
                 <h2>
-                    <a href="#">Book An Advisor</a></h2>
+                    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>  </h2>
             </center>
         </div>
         <div class="post-entry">

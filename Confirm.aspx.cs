@@ -46,7 +46,7 @@ public partial class Default2 : System.Web.UI.Page
         { shorttime[i] = availibility[i].ToShortTimeString(); }
 
 
-        Label3.Text = "For Advisor: ";
+        Label3.Text = "For Advisor: " + get.FullName;
         Label2.Text = "Your StudentID: " + Session["Student"].ToString(); ; 
         Label1.Text = "Date:" + Session["date"].ToString();
       

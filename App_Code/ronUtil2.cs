@@ -16,6 +16,7 @@ public class ronUtil2
 
 
     public string[] DaysAvailable { get; set; }
+    public string FullName { get; set; }
 
     public ronUtil2()
     {
@@ -26,6 +27,16 @@ public class ronUtil2
 	{
         DaysAvailable = getDaysAvailable(id);
 
+        SqlDataSource SqlDataSource3 = new SqlDataSource();
+        SqlDataSource3.ConnectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ToString();
+        SqlDataSource3.SelectCommand = "Select First_Name,Last_Name From Advisor Where Employee_ID='" + id.ToString() + "'";
+
+
+        DataView view3 = (DataView)SqlDataSource3.Select(DataSourceSelectArguments.Empty);
+        DataTable table3 = view3.ToTable();
+
+
+        FullName = table3.Rows[0][0].ToString() + " " + table3.Rows[0][1].ToString();
 
 
 	}
