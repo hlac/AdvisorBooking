@@ -18,10 +18,10 @@
         
         <asp:Label ID="Label2" runat="server" ForeColor="#CCCCCC" Text="Label"></asp:Label><br />
         <asp:Label ID="Label3" runat="server" ForeColor="#CCCCCC" Text="Label"></asp:Label><br />
- <asp:Label ID="Label1" runat="server" ForeColor="#CCCCCC" Text="Label"></asp:Label><br />
+ <asp:Label ID="Label1" runat="server" ForeColor="#CCCCCC" Text="Label"></asp:Label>
     
        <br /> <asp:Label ID="Label5" runat="server" ForeColor="#CCCCCC" Text="Time"></asp:Label>
-        <br />
+        :
         <asp:DropDownList ID="DropDownList1" runat="server" 
             onselectedindexchanged="DropDownList1_SelectedIndexChanged">
         </asp:DropDownList>
