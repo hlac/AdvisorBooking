@@ -12,7 +12,7 @@
         //Label1.Text = "Advisor:" + get.FullName ;
 
         Session["Student"] = 822459053;
-
+        lblAdvisorName.Text = get.FullName;
         
 
     }
@@ -26,14 +26,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <form id="form1" runat="server">
-    <% Session["date"] = Calendar1.SelectedDate.ToString("MM/dd/yyyy"); %>
-    <% Session["ID"] = Request.QueryString["ID"]; %>
+    <% Session["date"] = Calendar1.SelectedDate.ToString("MM/dd/yyyy"); %>    <% Session["ID"] = Request.QueryString["ID"]; %>
     
         <div class="post" id="post-5">
     <div class="post-title">
             <center>
                 <h2>
-                    <a href="#">Book An Advisor</a></h2>
+                    <asp:Label ID="lblAdvisorName" runat="server" Text="Advisor Name"></asp:Label>  </h2>
             </center>
         </div>
         <div class="post-entry">
