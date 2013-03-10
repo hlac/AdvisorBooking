@@ -81,7 +81,6 @@ public partial class Default2 : System.Web.UI.Page
             DateTime[] taken = get.getTaken(advisorId, date);
             DateTime[] availibility = get.getAvailability(advisorAllSlots, taken);
 
-            Session["date"] = null;
             
 
             bool proceed = false;

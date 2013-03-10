@@ -35,7 +35,7 @@ public class ronUtil2
         DataView view3 = (DataView)SqlDataSource3.Select(DataSourceSelectArguments.Empty);
         DataTable table3 = view3.ToTable();
 
-
+        if (table3.Rows.Count > 0)
         FullName = table3.Rows[0][0].ToString() + " " + table3.Rows[0][1].ToString();
 
 
@@ -195,10 +195,10 @@ public class ronUtil2
         DataTable table = view.ToTable();
 
         DateTime[] slotsTaken = new DateTime[table.Rows.Count];
-
-        for (int ii = 0; ii < table.Rows.Count; ii++)
-        { slotsTaken[ii] = DateTime.Parse(table.Rows[ii][0].ToString()); }
-
+        
+            for (int ii = 0; ii < table.Rows.Count; ii++)
+            { slotsTaken[ii] = DateTime.Parse(table.Rows[ii][0].ToString()); }
+        
         return slotsTaken;
     }
 
