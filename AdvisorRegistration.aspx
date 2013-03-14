@@ -4,9 +4,8 @@
     <form id="form1" runat="server">
         
           <div class="post" id="post-5">
-              <div class="post-title">
-                  <center>
-                      <h2>Advisor<a href="#"> Registration</a></h2></center>
+            <div class="post-title">
+              <center><h2><a href="#">Advisor Registration</a></h2></center>
             </div>
             <div class="post-entry">
               <div class="post-entry-top">
@@ -18,7 +17,7 @@
 
                     <table style="width: 100%">
                         <tr>
-                            <td style="width: 154px; text-align: right" valign="middle">
+                            <td style="width: 137px; text-align: right" valign="middle">
                                 &nbsp;</td>
                             <td style="width: 221px" valign="middle">
                                 &nbsp;</td>
@@ -26,7 +25,7 @@
                                 &nbsp;</td>
                         </tr>
                         <tr>
-                            <td style="width: 154px; text-align: right" valign="middle">
+                            <td style="width: 137px; text-align: right" valign="middle">
                                 <asp:Label ID="lblName" runat="server" style="font-weight: 700" Text="Name"></asp:Label>
                             </td>
                             <td style="width: 221px" valign="middle">
@@ -35,22 +34,19 @@
                                 <asp:RequiredFieldValidator ID="rfvFName" runat="server" 
                                     ErrorMessage="First Name should not be blank" ControlToValidate="txtFName" 
                                     Font-Bold="True" ForeColor="#FF3300">*</asp:RequiredFieldValidator>
-                                <asp:RangeValidator ID="rgvFName" runat="server" ControlToValidate="txtFName" 
-                                    ErrorMessage="First Name must contain characters only" ForeColor="#FF3300" 
-                                    MaximumValue="z" MinimumValue="a">*</asp:RangeValidator>
+                                
                             </td>
                             <td valign="middle">
-                                <asp:TextBox ID="txtLName" runat="server" Width="174px"></asp:TextBox>
+                                <asp:TextBox ID="txtLName" runat="server" Width="174px" 
+                                    ontextchanged="txtLName_TextChanged"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="rfvLName" runat="server" 
                                     ErrorMessage="Last Name should not be blank" ControlToValidate="txtLName" 
                                     Font-Bold="True" ForeColor="#FF3300">*</asp:RequiredFieldValidator>
-                                <asp:RangeValidator ID="rgvLName" runat="server" ControlToValidate="txtLName" 
-                                    ErrorMessage="Last Name must contain characters only" ForeColor="#FF3300" 
-                                    MaximumValue="z" MinimumValue="a">*</asp:RangeValidator>
+                               
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 154px" valign="middle">
+                            <td style="width: 137px" valign="middle">
                                 &nbsp;</td>
                             <td style="text-align: center; width: 221px" valign="middle">
                                 <asp:Label ID="lblFName" runat="server" style="font-weight: 700" 
@@ -62,17 +58,18 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 154px; text-align: right" valign="middle">
+                            <td style="width: 137px; text-align: right" valign="middle">
                                 <asp:Label ID="lblStudentID" runat="server" style="font-weight: 700" 
                                     Text="Employee I.D."></asp:Label>
                             </td>
                             <td style="width: 221px" valign="middle">
-                                <asp:TextBox ID="txtEmployeeID" runat="server" Width="174px"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="rfvStudentID" runat="server" 
-                                    ErrorMessage="Student ID should not be blank" ControlToValidate="txtStudentID" 
+                                <asp:TextBox ID="txtAdvisorID" runat="server" Width="174px" 
+                                    ontextchanged="txtAdvisorID_TextChanged"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvAdvisorID" runat="server" 
+                                    ErrorMessage="Advisor ID should not be blank" ControlToValidate="txtAdvisorID" 
                                     Font-Bold="True" ForeColor="#FF3300">*</asp:RequiredFieldValidator>
-                                <asp:RangeValidator ID="rgvStudentID" runat="server" ControlToValidate="txtStudentID" 
-                                    ErrorMessage="Student ID must be between 1 to 999999999" ForeColor="#FF3300" 
+                                <asp:RangeValidator ID="rgvAdvisorID" runat="server" ControlToValidate="txtAdvisorID" 
+                                    ErrorMessage="Advisor ID must be between 1 to 999999999" ForeColor="#FF3300" 
                                     MaximumValue="999999999" MinimumValue="1" Type="Integer">*</asp:RangeValidator>
                             </td>
                             <td valign="middle">
@@ -83,16 +80,20 @@
                                 <asp:Label ID="lblDepartmentSpecialization" runat="server" style="font-weight: 700" 
                                     Text="Department Specialization"></asp:Label>
                             </td>
-                            <td style="width: 221px" valign="middle">
-                                <asp:DropDownList ID="ddlDepartmentSpecialization" runat="server" 
-                                    style="margin-top: 1px">
-                                </asp:DropDownList>
+                             <td style="width: 250px" valign="middle"  colspan="2">
+                                 <asp:DropDownList ID="Dept_DropDownList" runat="server" 
+                                     DataSourceID="SqlDataSource2" DataTextField="Dept_Name" 
+                                     DataValueField="Dept_Id">
+                                 </asp:DropDownList>
+                                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                                     ConnectionString="<%$ ConnectionStrings:College_MgmtConnectionString %>" 
+                                     SelectCommand="SELECT [Dept_Name], [Dept_Id] FROM [Department]">
+                                 </asp:SqlDataSource>
+                               
                             </td>
-                            <td valign="middle">
-                                &nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 154px; text-align: right;" valign="middle">
+                            </tr>
+                             <tr>
+                            <td style="width: 137px; text-align: right;" valign="middle">
                                 <asp:Label ID="lblEmailID" runat="server" style="font-weight: 700" 
                                     Text="Email ID"></asp:Label>
                             </td>
@@ -110,7 +111,7 @@
                                 &nbsp;</td>
                         </tr>
                         <tr>
-                            <td style="width: 154px; text-align: right;" valign="middle">
+                            <td style="width: 137px; text-align: right;" valign="middle">
                                 <asp:Label ID="lblPassword" runat="server" style="font-weight: 700" 
                                     Text="Password"></asp:Label>
                             </td>
@@ -124,7 +125,7 @@
                                 &nbsp;</td>
                         </tr>
                         <tr>
-                            <td style="width: 154px; text-align: right;" valign="middle">
+                            <td style="width: 137px; text-align: right;" valign="middle">
                                 <asp:Label ID="lblConfirmPassword" runat="server" style="font-weight: 700" 
                                     Text="Confirm Password"></asp:Label>
                             </td>
@@ -141,32 +142,26 @@
                             <td valign="middle">
                                 &nbsp;</td>
                         </tr>
-                        <tr>
-                            <td style="width: 154px" valign="middle">
-                                <tr>
+
+                            <tr>
                             <td style="width: 137px" valign="middle">
-                                 <asp:Label ID="LabelImg" runat="server" style="font-weight: 700"
+                                 <asp:Label ID="LabelImg" runat="server" style="font-weight: 700" 
                                     Text="Upload Image"></asp:Label></td>
                             <td style="width: 221px" valign="middle">
                                 <asp:FileUpload ID="FpImg" runat="server" /></td>
                             <td valign="middle">
                                 &nbsp;</td>
-                        </tr>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 137px" valign="middle">
+                                &nbsp;</td>
                             <td style="width: 221px" valign="middle">
                                 &nbsp;</td>
                             <td valign="middle">
                                 &nbsp;</td>
                         </tr>
                         <tr>
-                            <td style="width: 154px" valign="middle">
-                                &nbsp;</td>
-                            <td style="width: 221px" valign="middle">
-                                &nbsp;</td>
-                            <td valign="middle">
-                                &nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 154px" valign="middle">
+                            <td style="width: 137px" valign="middle">
                                 &nbsp;</td>
                             <td style="width: 221px" valign="middle">
                                 <asp:Button ID="btnRegister" runat="server" Text="Register" 
@@ -176,7 +171,7 @@
                                 &nbsp;</td>
                         </tr>
                         <tr>
-                            <td style="width: 154px" valign="middle">
+                            <td style="width: 137px" valign="middle">
                                 &nbsp;</td>
                             <td colspan="2" valign="middle">
                                 <asp:ValidationSummary ID="ValidationSummary" runat="server" 
@@ -202,6 +197,4 @@
         
     
 </form>
-
 </asp:Content>
-

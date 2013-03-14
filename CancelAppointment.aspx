@@ -54,7 +54,7 @@
                                     Text="Reason to Cancel"></asp:Label>
                             </td>
                             <td style="width: 221px" valign="middle">
-                                <asp:TextBox ID="txtComments" runat="server" Width="200px" Height="70px"></asp:TextBox>
+                                <asp:TextBox ID="txtComments" runat="server" Width="217px" Height="42px"></asp:TextBox>
                             </td>
 
                         </tr>
