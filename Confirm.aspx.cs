@@ -12,53 +12,52 @@ public partial class Default2 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Prwvent excepts,corruptions.
+        //Prevent exceptions,corruptions.
 
-        Session["Student"]=822459053;
-            if (Session["date"] == null || Session["ID"] == null)
+        
+        if (Session["date"] == null || Session["AdvisorID"] == null)
             {
                 Server.Transfer("Advisor.aspx");
             }
 
-
-            int studentId = 822459052; 
-        int advisorId = Convert.ToInt16(Session["ID"].ToString());
+        int studentId = Convert.ToInt32(Session["StudentID"].ToString());
+        int advisorId = Convert.ToInt32(Session["AdvisorID"].ToString());
         string date = Session["date"].ToString();
         ronUtil2 get = new ronUtil2(advisorId);
 
-        
-        if (get.getCheck(studentId) == true)
-        { Button1.Visible = true; }
-        else
-        { Button2.Visible = true; }
+        Submit.Visible = true;
+        //if (get.getCheck(studentId) == true)
+        //{ Submit.Visible = true; }
+        //else
+        //{ Cancel.Visible = true; }
 
         DateTime datev2 = DateTime.ParseExact(Session["date"].ToString(), "MM/dd/yyyy", null);
-
         DateTime[] advisorAllSlots = get.getSlots(advisorId, date);
         DateTime[] taken = get.getTaken(advisorId, date);
         DateTime[] availibility = get.getAvailability(advisorAllSlots, taken);
-
         
-
-
         string[] shorttime = new string[availibility.Length];
         for (int i = 0; i < availibility.Length; i++)
         { shorttime[i] = availibility[i].ToShortTimeString(); }
 
 
-        Label3.Text = "For Advisor: " + get.FullName;
-        Label2.Text = "Your StudentID: " + Session["Student"].ToString(); ; 
-        Label1.Text = "Date:" + Session["date"].ToString();
-      
+        txtAdvisorName.Text = get.FullName;
 
+        //Label1.Text = "Date : " + datev2.ToLongDateString();
+        txtDate.Text = datev2.ToShortDateString();
+
+        
             DropDownList1.DataSource = shorttime;
-            if (!IsPostBack)
-            { DropDownList1.DataBind(); }
+         //   DropDownList1.DataBind();
+          if (!IsPostBack)
+           { 
+                DropDownList1.DataBind();
+           }
 
             
             if (availibility.Length==0)
             {Response.Write("<script type='text/javascript'>alert('It is fully booked.');</script>");
-                Server.Transfer("Calendar.aspx");}
+                Server.Transfer("Schedule.aspx");}
             
 
     }
@@ -69,12 +68,14 @@ public partial class Default2 : System.Web.UI.Page
     protected void Button1_Click(object sender, EventArgs e)
     {
         //Prevent corruption. Double check availability. Delete cookies
-        if (Session["date"] != null && Session["ID"] != null)
+        if (Session["date"] != null && Session["AdvisorID"] != null)
         {
-            int advisorId = Convert.ToInt16(Session["ID"].ToString());
+
+            int advisorId = Convert.ToInt32(Session["AdvisorID"].ToString());
             string date = Session["date"].ToString();
+            int studentId = Convert.ToInt32(Session["StudentID"].ToString());
             Session["date"] = null;
-            Session["ID"] = null;
+            Session["AdvisorID"] = null;
             ronUtil2 get = new ronUtil2(advisorId);
             DateTime datev2 = DateTime.ParseExact(date, "MM/dd/yyyy", null);
             DateTime[] advisorAllSlots = get.getSlots(advisorId, date);
@@ -92,19 +93,18 @@ public partial class Default2 : System.Web.UI.Page
                 }
             }
 
-            if (proceed == true)
+            if (proceed)
             {
                 DateTime picked = new DateTime();
                 picked = DateTime.ParseExact(DropDownList1.SelectedValue.ToString(), "h:mm tt", CultureInfo.InvariantCulture);
 
-                int Student_Id = 822459053;
+                int Student_Id = studentId;
                 int Advisor_Id = advisorId;
                 string Time = picked.ToString("HH:mm:ss");
                 string Date = datev2.ToString("yyyy-MM-dd");
                 Label1.Text = Time;
                 string Comments = TextArea1.Value.ToString();
                 int Availability_ID= get.getAvailableID(Advisor_Id, date);
-
 
                 string sqlQuery = "INSERT INTO Appointment (Availability_ID, Student_Id,Time,Date,Comment)";
                 sqlQuery += " VALUES (@Availability_ID,@Student_Id,@Time,@Date,@Comment)";
@@ -114,12 +114,10 @@ public partial class Default2 : System.Web.UI.Page
                     using (SqlCommand dataCommand = new SqlCommand(sqlQuery, dataConnection))
                     {
                         dataCommand.Parameters.AddWithValue("Availability_ID", Availability_ID);
-                        dataCommand.Parameters.AddWithValue("Student_Id", Student_Id);
+                        dataCommand.Parameters.AddWithValue("Student_Id", studentId);
                         dataCommand.Parameters.AddWithValue("Time", Time);
                         dataCommand.Parameters.AddWithValue("Date", Date);
                         dataCommand.Parameters.AddWithValue("Comment", Comments);
-                  
-
                         dataConnection.Open();
                         dataCommand.ExecuteNonQuery();
                         dataConnection.Close();
@@ -142,4 +140,5 @@ public partial class Default2 : System.Web.UI.Page
     {
 
     }
+
 }
