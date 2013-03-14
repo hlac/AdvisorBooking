@@ -207,7 +207,6 @@ public class ronUtil
         DateTime last = now.AddDays(8);
         DateTime[] allDays = new DateTime[8];
 
-
         for (int i = 0; i < allDays.Length; i++)
         {
             allDays[i] = now.AddDays(i);

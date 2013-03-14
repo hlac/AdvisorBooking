@@ -4,32 +4,43 @@
 <script language="C#" runat="server">
     void cmd(Object sender, EventArgs e) 
     {
-        Session["Student"] = 822459053;
+        
     }
     </script>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <form id="form1" runat="server" style="height: 318px">
-<style type="text/css">
-a{color:white;}
-</style>
 
     <div class="post" id="post-5">
     <div class="post-title">
+        
             <center>
                 <h2>
-                    <a href="#">Book An Advisor</a></h2>
+                    Book An Advisor
+                </h2>   
+              
+                
             </center>
         </div>
         <div class="post-entry">
             <div class="post-entry-top">
                 <div class="post-entry-bottom">
 
+                     <div align="right">
+                       
+                                 <asp:DropDownList ID="DropDownList1" runat="server" Height="16px" Width="128px" 
+                                     AutoPostBack="True">
+                                 </asp:DropDownList>
+                         
+                              &nbsp;    &nbsp;    &nbsp;    &nbsp;
 
-    <br />
-    <br />
+                              </div>
+
+
+                    <br />
+<br />
         <asp:Table ID="myTable" runat="server" Width="720px" 
   ForeColor="#FFCC99" Font-Size="Smaller"> 
-    <asp:TableRow ID="myTR" runat="server" Width="720px"  BackColor="#3366CC" ForeColor="White">
+    <asp:TableRow ID="myTR" runat="server" Width="720px"  BackColor="#214183" ForeColor="White">
        
         		<asp:TableCell>Advisor</asp:TableCell>
                 <asp:TableCell>Department</asp:TableCell>
@@ -43,6 +54,16 @@ a{color:white;}
 <br />
 
 </div></div></div></div>
+
+    <script type="text/javascript">
+        function popupCalendar() {
+            var dateField = document.getElementById('dateField'); // toggle the div 
+            if (dateField.style.display == 'none')
+                dateField.style.display = 'block';
+            else dateField.style.display = 'none';
+        } 
+     </script>
+
 
     </form>
 </asp:Content>
